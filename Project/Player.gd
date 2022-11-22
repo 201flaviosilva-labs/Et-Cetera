@@ -4,6 +4,7 @@ export (float) var NORMAL_SPEED: float = 10
 export (float) var JUMP_FORCE: float = 10
 export (Vector3) var GRAVITY: Vector3 = Vector3.DOWN * 15
 export (float) var MOUSE_SENSIVITY: float = 0.3
+export (float, 0, 200) var inertia: float = 0.5
 
 var velocity: Vector3 = Vector3.ZERO
 var is_jumping: bool = false
@@ -42,7 +43,13 @@ func _physics_process(delta: float) -> void:
 	
 	var snap_vector = Vector3.DOWN if not is_jumping else Vector3.ZERO
 	
-	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true, 4, deg2rad(70))
+	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true, 10, deg2rad(70), false)
+	
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.is_in_group("crate"):
+			collision.collider.apply_central_impulse(-collision.normal * inertia)
+	
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -9,7 +9,7 @@ material = SubResource( 3 )
 
 [sub_resource type="BoxShape" id=2]
 
-[node name="Crate" type="RigidBody"]
+[node name="Crate" type="RigidBody" groups=["crate"]]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true

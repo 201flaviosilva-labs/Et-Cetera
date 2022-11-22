@@ -2,12 +2,10 @@
 
 ## Description
 
-Um simple repositório template para projetos em Godot
+Try to create something in 3D with Godot :)
 
 ## Links
 
-- [Play](https://master.d3kjckivyd1c76.amplifyapp.com);
-- [Code](https://github.com/201flaviosilva-labs/Godot-Repository-Template);
-	- [Bitbucket - Godot Project](https://bitbucket.org/201flaviosilva/workspace/projects/GODOT/);
+- [Play](https://201flaviosilva.github.io/Et-Cetera/);
+- [Code](https://github.com/201flaviosilva/Et-Cetera);
 - [Godot Official Web Site](https://godotengine.org/);
-- [Tutorial]();
