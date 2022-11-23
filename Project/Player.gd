@@ -9,6 +9,7 @@ export (float, 0, 200) var inertia: float = 0.5
 var velocity: Vector3 = Vector3.ZERO
 var is_jumping: bool = false
 
+onready var bullet: PackedScene = preload("res://Bullet.tscn")
 onready var CAMERA: Camera = $Camera
 
 func _ready() -> void:
@@ -16,6 +17,11 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+	_input_move()
+	_input_shoot()
+	pass
+
+func _input_move() -> void:
 	var input = Vector3.ZERO
 	var speed = NORMAL_SPEED
 	
@@ -38,18 +44,27 @@ func _process(delta: float) -> void:
 	velocity.z = input.z
 	pass
 
+func _input_shoot() -> void:
+	if Input.is_action_pressed("shoot"):
+		var new_bullet = bullet.instance()
+		get_tree().root.add_child(new_bullet)
+		new_bullet.global_translation = $gun.global_translation
+		var direction = ($bullet_direction.global_translation - $gun.global_translation).normalized()
+		new_bullet.apply_central_impulse(direction * 100)
+		pass
+	pass
+
 func _physics_process(delta: float) -> void:
 	velocity += GRAVITY * delta
 	
 	var snap_vector = Vector3.DOWN if not is_jumping else Vector3.ZERO
 	
-	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true, 10, deg2rad(70), false)
+	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true, 10, deg2rad(70), true)
 	
 	for index in get_slide_count():
 		var collision = get_slide_collision(index)
-		if collision.collider.is_in_group("crate"):
+		if collision.collider.is_in_group("bouce_object"):
 			collision.collider.apply_central_impulse(-collision.normal * inertia)
-	
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:

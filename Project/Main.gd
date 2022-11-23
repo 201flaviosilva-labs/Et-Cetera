@@ -15,6 +15,6 @@ func _create_new_crate() -> void:
 	var z = rng.randi_range(-49, 49)
 	var color := Color(rng.randf(),rng.randf(),rng.randf())
 	new_crate.translate(Vector3(x,y,z))
-	new_crate.call_deferred("_start", color)
+	new_crate.call_deferred("change_color", color)
 	add_child(new_crate)
 	pass

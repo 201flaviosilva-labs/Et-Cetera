@@ -15,7 +15,7 @@ script = ExtResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 
 [node name="Crate" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 11, -14 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -14 )
 
 [node name="Walls" type="Spatial" parent="."]
 
