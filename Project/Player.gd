@@ -8,6 +8,7 @@ export (float, 0, 200) var inertia: float = 0.5
 
 var velocity: Vector3 = Vector3.ZERO
 var is_jumping: bool = false
+var can_shoot: bool = true
 
 onready var bullet: PackedScene = preload("res://Bullet.tscn")
 onready var CAMERA: Camera = $Camera
@@ -45,12 +46,18 @@ func _input_move() -> void:
 	pass
 
 func _input_shoot() -> void:
-	if Input.is_action_pressed("shoot"):
+	if Input.is_action_pressed("shoot") and can_shoot:
+		can_shoot = false
+		
+		$ShootCooldown.start()
+		
 		var new_bullet = bullet.instance()
+		
 		get_tree().root.add_child(new_bullet)
-		new_bullet.global_translation = $gun.global_translation
-		var direction = ($bullet_direction.global_translation - $gun.global_translation).normalized()
-		new_bullet.apply_central_impulse(direction * 100)
+		new_bullet.global_translation = $Camera/gun.global_translation
+		
+		var direction = ($Camera/bullet_direction.global_translation - $Camera/gun.global_translation).normalized()
+		new_bullet.apply_central_impulse(direction * 75)
 		pass
 	pass
 
@@ -82,3 +89,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	pass
 
+func _on_ShootCooldown_timeout() -> void:
+	can_shoot = true
+	pass
