@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleMesh" id=1]
 
 [sub_resource type="CapsuleShape" id=2]
+
+[sub_resource type="CapsuleMesh" id=3]
+radius = 0.1
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.490196, 0.443137, 0.443137, 1 )
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -24,11 +30,17 @@ shape = SubResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.821861 )
 current = true
 
+[node name="Gun" type="MeshInstance" parent="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.75, 0.4, -0.25, -0.419815 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 4 )
+
 [node name="gun" type="Position3D" parent="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -2.17814 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.25, -0.839815 )
 
 [node name="bullet_direction" type="Position3D" parent="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -3.17814 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.25, -1.96835 )
 
 [node name="ShootCooldown" type="Timer" parent="."]
 wait_time = 0.1

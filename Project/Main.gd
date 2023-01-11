@@ -1,6 +1,6 @@
 extends Spatial
 
-var CRATE: PackedScene = preload("res://Crate.tscn")
+var CRATE: PackedScene = preload("res://Objects/Crate.tscn")
 var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:

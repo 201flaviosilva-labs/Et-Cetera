@@ -33,7 +33,7 @@ func _input_move() -> void:
 	else: is_jumping = false
 	
 	# Move
-	if Input.is_action_pressed("run"): speed = NORMAL_SPEED * 1.5
+	if Input.is_action_pressed("run") and is_on_floor(): speed = NORMAL_SPEED * 1.5
 		
 	if Input.is_action_pressed("move_forward"): input += -speed * transform.basis.z
 	if Input.is_action_pressed("move_backward"): input += speed * transform.basis.z
